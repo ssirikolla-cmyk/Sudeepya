@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudeepya 💖 Will You Be My Valentine?</title>
+  <style>
+    :root{
+      --pink1:#ff9acb;--pink2:#ff6fae;--pink3:#ffb7d9;--rose:#ff3b6f;--bg1:#ffdee9;--bg2:#b5fffc;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;overflow-x:hidden;font-family:'Segoe UI',system-ui,Arial,sans-serif;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      animation:bgShift 10s ease-in-out infinite alternate;
+      color:#7a0f3c;
+    }
+    @keyframes bgShift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(20deg)}}
+    body.beat{animation:beatPulse .6s ease-in-out}
+    @keyframes beatPulse{0%{transform:scale(1)}50%{transform:scale(1.01)}100%{transform:scale(1)}}.center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+.card{
+  width:100%;max-width:720px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);
+  border-radius:28px;box-shadow:0 20px 50px rgba(0,0,0,.15);padding:28px;position:relative;
+  animation:pop .6s ease-out;
+}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+
+h1,h2,h3{text-align:center;margin:.2em 0}
+h1{font-size:2.2rem}
+h2{font-size:1.6rem}
+p{line-height:1.7}
+
+.heart, .petal{position:fixed;bottom:-40px;font-size:18px;animation:float 8s linear infinite;opacity:.8}
+@keyframes float{to{transform:translateY(-110vh) translateX(var(--x));opacity:0}}
+
+.btns{display:flex;gap:14px;justify-content:center;margin-top:20px}
+button{
+  border:none;border-radius:999px;padding:14px 22px;font-size:1rem;cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.yes{background:linear-gradient(135deg,var(--pink2),var(--rose));color:white;box-shadow:0 10px 20px rgba(255,59,111,.4)}
+.no{background:#fff;color:#b0124a;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+button:hover{transform:translateY(-2px)}
+.hidden{display:none}
+
+.rose-wrap{display:flex;justify-content:center;margin:10px 0}
+svg{filter:drop-shadow(0 10px 20px rgba(255,59,111,.35))}
+
+.gifts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:14px}
+.gift{background:#fff;border-radius:18px;padding:16px;text-align:center;cursor:pointer;box-shadow:0 10px 22px rgba(0,0,0,.12);animation:wiggle 2.4s ease-in-out infinite}
+.gift:nth-child(2){animation-delay:.6s}.gift:nth-child(3){animation-delay:1.2s}
+@keyframes wiggle{0%,100%{transform:rotate(0)}50%{transform:rotate(1.5deg)}}
+
+.music{position:fixed;right:14px;bottom:14px;background:#fff;border-radius:999px;padding:10px 14px;box-shadow:0 10px 20px rgba(0,0,0,.15)}
+.letter{max-height:60vh;overflow:auto;padding-right:8px}
+.nuke{animation:nuke 1.2s ease-in-out forwards}
+@keyframes nuke{0%{transform:scale(1)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+.initials{position:fixed;inset:0;pointer-events:none;opacity:.06;
+  background:repeating-linear-gradient(45deg,transparent 0 40px,rgba(255,105,180,.4) 40px 80px);
+}
+.initials::after{content:'S ❤ S';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);font-size:18vw;font-weight:700;color:#ff2f6d;}
+
+  </style>
+</head>
+<body>
+  <div class="initials"></div><audio id="bgm" loop src="https://cdn.pixabay.com/audio/2023/03/27/audio_9a0a8e2c7d.mp3"></audio> <audio id="heartbeat" loop src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b8c7f6c6a.mp3"></audio>
+
+  <div class="music"><button onclick="toggleMusic()">🎵 Music</button></div>  <section id="p1" class="center">
+    <div class="card">
+      <h1>Hey Sudeepya 💕</h1>
+      <h2>Will you be my Valentine?</h2>
+      <div class="btns">
+        <button id="yes" class="yes" onclick="accept()">Yes 💖</button>
+        <button id="no" class="no" onclick="nope()">No 🙈</button>
+      </div>
+    </div>
+  </section>  <section id="p2" class="center hidden">
+    <div class="card">
+      <h2>Yay! You said YES 💗</h2>
+      <p style="text-align:center">I made a few surprises just for you…</p>
+      <div class="gifts">
+        <div class="gift" onclick="showRose()">🌹 A Rose</div>
+        <div class="gift" onclick="showLetter()">💌 A Letter</div>
+        <div class="gift" onclick="finalNuke()">✨ One Last Thing</div>
+      </div>
+    </div>
+    <p style="text-align:center" id="valentineCountdown"></p>
+  </section>  <section id="rose" class="center hidden">
+    <div class="card">
+      <h2>For You, Sudeepya 🌹</h2>
+      <div class="rose-wrap">
+        <svg width="220" height="320" viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ff7aa8"/>
+              <stop offset="100%" stop-color="#ff2f6d"/>
+            </linearGradient>
+          </defs>
+          <path d="M110 80 C60 20,10 120,110 160 C210 120,160 20,110 80Z" fill="url(#petal)"/>
+          <path d="M110 150 C90 190,90 230,110 300 C130 230,130 190,110 150Z" fill="#2ecc71"/>
+        </svg>
+      </div>
+      <p style="text-align:center">A colorful rose — because plain words weren’t enough.</p>
+      <div class="btns"><button class="yes" onclick="back()">Back 💗</button></div>
+    </div>
+  </section>  <section id="letter" class="center hidden">
+    <div class="card">
+      <h2>My Letter to You 💌</h2>
+      <div class="letter">
+        <p><strong>Hey,</strong></p>
+        <p>I don’t even know where to start, so I’ll start with the truth... [Letter content stays same 500+ words]</p>
+      </div>
+      <div class="btns"><button class="yes" onclick="back()">Back 💗</button></div>
+    </div>
+  </section>  <section id="final" class="center hidden">
+    <div class="card nuke">
+      <h2>One Last Thing… 💥💖</h2>
+      <p style="text-align:center">No matter where life takes us, this will always be real.</p>
+      <h1 style="text-align:center">I choose you, Sudeepya.</h1>
+      <p style="text-align:center">Happy Valentine’s 💕</p>
+    </div>
+  </section>  <script>
+    let tries=0;
+    function nope(){tries++;const y=document.getElementById('yes');const n=document.getElementById('no');y.style.transform=`scale(${1+tries*.18})`;n.style.opacity=Math.max(.1,1-tries*.15);if(tries>=7) n.style.display='none'}
+    function accept(){show('p2')}
+    function show(id){['p1','p2','rose','letter','final'].forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden')}
+    function back(){show('p2')}
+    function showRose(){show('rose')}
+    function showLetter(){show('letter')}
+    function finalNuke(){
+      show('final');
+      slowPetals=false;
+      setTimeout(()=>fadeOut(),3000);
+    }
+
+    function toggleMusic(){const a=document.getElementById('bgm');const h=document.getElementById('heartbeat');if(a.paused){a.play();h.volume=0.2;h.play();startBeat()}else{a.pause();h.pause();stopBeat()}}
+    let beatInt;
+    function startBeat(){stopBeat();beatInt=setInterval(()=>{document.body.classList.add('beat');setTimeout(()=>document.body.classList.remove('beat'),300)},650)}
+    function stopBeat(){clearInterval(beatInt)}
+
+    // Hearts and petals
+    let slowPetals=true;
+    const makeHeart=()=>{
+      const h=document.createElement('div');
+      h.className=Math.random()>.5?'heart':'petal';
+      h.textContent=Math.random()>.5?'💗':'🌸';
+      h.style.left=Math.random()*100+'vw';
+      h.style.setProperty('--x',(Math.random()*200-100)+'px');
+      h.style.animationDuration=(6+Math.random()*6)*(slowPetals?1:2)+'s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),12000);
+    };
+    setInterval(makeHeart,600);
+
+    // Valentine countdown
+    const cd=document.getElementById('valentineCountdown');
+    function upd(){const now=new Date();const y=now.getFullYear();const v=new Date(`${y}-02-14T00:00:00`);if(now>v)v.setFullYear(y+1);const d=Math.max(0,Math.floor((v-now)/86400000));cd.textContent=`⏳ ${d} days until Valentine’s Day`}
+    upd();setInterval(upd,3600000);
+
+    // Cinematic fade
+    function fadeOut(){
+      const f=document.createElement('div');
+      f.style.position='fixed';f.style.inset=0;f.style.background='#000';f.style.opacity=0;f.style.transition='opacity 3s ease';
+      document.body.appendChild(f);
+      setTimeout(()=>f.style.opacity=1,100);
+    }
+  </script></body>
+                </html>
